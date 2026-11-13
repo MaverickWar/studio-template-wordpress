@@ -1,0 +1,21 @@
+name: Checks
+on:
+  push:
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: PHP has no syntax errors
+        run: find . -name '*.php' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l
+      - name: Templates and theme.json are valid
+        run: node tools/check-theme.mjs
+      - name: WordPress runs the theme
+        run: bash tools/smoke-test.sh

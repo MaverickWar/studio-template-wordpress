@@ -1,0 +1,10 @@
+{
+  "name": "studio-template-wordpress",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "npx @wp-playground/cli@3 server --mount=.:/wordpress/wp-content/themes/studio-starter --login",
+    "check": "node tools/check-theme.mjs",
+    "smoke": "bash tools/smoke-test.sh"
+  }
+}
